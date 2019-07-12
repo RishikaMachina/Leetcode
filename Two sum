@@ -1,3 +1,8 @@
+#Runtime: 6188 ms
+#Memory Usage: 13.6 MB
+
+#memory usage beats 95.43% of python3 submissions
+
 class Solution():
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         a=[]
