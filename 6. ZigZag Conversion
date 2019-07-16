@@ -1,0 +1,25 @@
+# Runtime: 64 ms, faster than 78.96% of Python3 online submissions for ZigZag Conversion.
+#Memory Usage: 13.3 MB, less than 61.57% of Python3 online submissions for ZigZag Conversion.
+
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        final = {}
+        if (numRows <= 1):
+            return s
+        row_iterator = 1
+        step = 1
+        
+        for char in s:
+            if row_iterator not in final:
+                final[row_iterator] = char
+            else:
+                final[row_iterator] += char
+                
+            row_iterator = row_iterator + step
+            if((row_iterator == 1) or (row_iterator == numRows)): 
+                step = step*(-1)
+        s = []
+        for i in final.values():
+            s.append(i)
+            
+        return "".join(s)
