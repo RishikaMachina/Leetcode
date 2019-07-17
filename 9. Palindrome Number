@@ -1,0 +1,19 @@
+#Runtime: 92 ms, faster than 24.39% of Python3 online submissions for Palindrome Number.
+#Memory Usage: 13.3 MB, less than 53.99% of Python3 online submissions for Palindrome Number.
+
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        stack = []
+        if(x<0):
+            return False
+        elif(x>0):
+            r = list(map(int, str(x)))
+            for i in range(0,len(r)):
+                stack.append(r.pop())
+                
+            stack = int("".join(map(str, stack)))
+            if(x == stack):
+                return True
+            return False
+        else:
+            return True
