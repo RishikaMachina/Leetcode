@@ -1,0 +1,21 @@
+def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        def pre_order(root,a):
+            if root: 
+                a.append(','+str(root.val)+',')
+                pre_order(root.left,a) 
+                pre_order(root.right,a)
+            else:
+                a.append('null')
+            return a
+        
+        def check(b,a):
+            b = ''.join(b)
+            a = ''.join(a)
+            if(a==b):
+                return True
+            if(b.find(a)>=1):
+                return True
+            else:
+                return False
+            
+        return check(pre_order(s,[]),pre_order(t,[]))
