@@ -1,0 +1,28 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        
+        def recur_match(s, t):
+            if s and t:
+                return (s.val == t.val and recur_match(s.left, t.left) and recur_match(s.right, t.right))
+            elif(s or t):
+                return False
+            else:
+                return True
+        def dfs(s, t):
+            if s and t:
+                if s.val == t.val and recur_match(s, t):
+                    return True
+                return dfs(s.left, t) or dfs(s.right, t)
+            elif any([s, t]):
+                return False
+            else:
+                return True
+            
+        return dfs(s, t)
