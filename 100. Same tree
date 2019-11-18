@@ -1,0 +1,22 @@
+class Solution:
+      def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+          def pre_order(s,a):
+              if s:
+                  a.append(',')
+                  a.append(str(s.val))
+                  a.append(',')
+                  pre_order(s.left,a)
+                  pre_order(s.right,a)
+              else:
+                  a.append('null')
+              return a
+
+      def is_same(a,b):
+          a = "".join(a)
+          b = "".join(b)
+          if (a==b):
+              return True
+          else:
+              return False
+
+      return is_same(pre_order(p,[]),pre_order(q,[]))
