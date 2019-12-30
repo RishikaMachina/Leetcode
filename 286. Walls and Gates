@@ -1,0 +1,55 @@
+#DFS
+
+def wallsAndGates(self, rooms: List[List[int]]) -> None:
+	if not rooms:
+		return
+	self.rows = len(rooms)
+	self.cols = len(rooms[0])
+	for i in range(self.rows):
+		for j in range(self.cols):
+			if rooms[i][j] == 0:
+				self.helper(rooms,i,j,0)
+
+def helper(self,rooms,i,j,depth):
+	if i<0 or i >=len(rooms) or j <0 or j >=len(rooms[0]) or rooms[i][j] == -1:
+		return
+
+	if rooms[i][j] > depth or depth ==0:
+		rooms[i][j] = depth
+
+		self.helper(rooms,i-1,j,depth+1)
+		self.helper(rooms,i+1,j,depth+1)
+		self.helper(rooms,i,j-1,depth+1)
+		self.helper(rooms,i,j+1,depth+1)
+
+	return rooms
+  
+  
+  
+  
+#BFS
+
+def wallsAndGates(self, rooms: List[List[int]]) -> None:
+    if not rooms:
+        return rooms
+    queue = []
+    for i in range(len(rooms)):
+        for j in range(len(rooms[0])):
+            if rooms[i][j] == 0:
+                queue.append([i,j])
+            else:
+                continue
+    directions = [[0,1],[0,-1],[1,0],[-1,0]]
+    depth = 0
+    while queue:
+        for i in range(len(queue)):
+            rooms[queue[i][0]][queue[i][1]] = depth
+            
+        for _ in range(len(queue)): 
+            x= queue.pop(0)
+            for i in directions:
+                a = i[0] + x[0]
+                b = i[1] + x[1]
+                if 0<=a<len(rooms) and 0<=b<len(rooms[0]) and rooms[a][b] ==                                                                            2**31-1:
+                    queue.append([a,b])
+        depth += 1
