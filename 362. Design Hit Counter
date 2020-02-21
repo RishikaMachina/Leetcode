@@ -1,0 +1,35 @@
+class HitCounter:
+    def __init__(self):
+        self.hits = []
+        self.hit_number = {}
+        self.prev = 0
+
+    def hit(self, timestamp: int) -> None:
+        if timestamp not in self.hits:
+            self.hits.append(timestamp)
+        self.prev += 1
+        if timestamp not in self.hit_number:
+            self.hit_number[timestamp] = self.prev
+        else:
+            self.hit_number[timestamp] += 1
+    
+    def binary_search(self, target):
+        low = 0
+        high = len(self.hits)-1
+        while low <= high:
+            mid = low + (high - low)//2
+            if self.hits[mid] == target:
+                return mid
+            elif self.hits[mid] > target:
+                high = mid - 1
+            else:
+                low = mid + 1
+        return low
+        
+    def getHits(self, timestamp: int) -> int:
+        low = self.binary_search(timestamp - 299)
+        if not low:
+            if not self.hits:
+                return 0
+            return self.hit_number[self.hits[-1]]
+        return self.hit_number[self.hits[-1]] - self.hit_number[self.hits[low-1]]  
